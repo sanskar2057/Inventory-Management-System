@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Inventory System</title>
+<script type="text/javascript">
+$(document).ready(function()
+{
+$(".edit_tr").click(function()
+{
+var ID=$(this).attr('id');
+$("#first_"+ID).show();
+$("#last_"+ID).hide();
+$("#last_input_"+ID).show();
+}).change(function()
+{
+var ID=$(this).attr('id');
+var first=$("#first_input_"+ID).val();
+var last=$("#last_input_"+ID).val();
+var dataString = 'id='+ ID +'&price='+first+'&qty_sold='+last;
+$("#first_"+ID).html('<img src="load.gif" />');
+
+
+if(first.length && last.length>0)
+{
+$.ajax({
+type: "POST",
+url: "table_edit_ajax.php",
+data: dataString,
+cache: false,
+success: function(html)
+{
+
+$("#first_"+ID).html(first);
+$("#last_"+ID).html(last);
+}
+});
+}
+else
+{
+alert('Enter something.');
+}
+
+});
+
+$(".editbox").mouseup(function() 
+{
+return false
+});
+
+$(document).mouseup(function()
+{
+$(".editbox").hide();
+$(".text").show();
+});
+
+});
+</script>
+<style>
+body
+{
+font-family:Arial, Helvetica, sans-serif;
+font-size:14px;
+padding:10px;
+}
+.logo{
+	font-size: 20px;
+            color: black;
+            font-weight: bolder;
+            text-shadow: -1px 1px 0 yellow,
+                          1px 1px 0 yellow,
+                         1px -1px 0  yellow,
+                        -1px -1px 0  yellow;
+            text-align:center;
+
+}
+.editbox
+{
+display:none
+}
+td
+{
+padding:7px;
+border-left:1px solid #fff;
+border-bottom:1px solid #fff;
+}
+table{
+border-right:1px solid #fff;
+}
+.editbox
+{
+font-size:14px;
+width:29px;
+background-color:#ffffcc;
+
+border:solid 1px #000;
+padding:0 4px;
+}
+.edit_tr:hover
+{
+background:url(edit.png) right no-repeat #80C8E5;
+cursor:pointer;
+}
+.edit_tr
+{
+background: none repeat scroll 0 0 #D5EAF0;
+}
+th
+{
+font-weight:bold;
+text-align:left;
+padding:7px;
+border:1px solid #fff;
+border-right-width: 0px;
+}
+.head
+{
+background: none repeat scroll 0 0 #91C5D4;
+color:#00000;
+}
+
+</style>
+<link rel="stylesheet" href="reset.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="tab.css" type="text/css" media="screen" />
+<link rel="stylesheet" type="text/css" href="tcal.css" />
+<script type="text/javascript" src="tcal.js"></script> 
+<link href="tabs.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+
+var popupWindow=null;
+
+function child_open()
+{ 
+
+popupWindow =window.open('printform.php',"_blank","directories=no, status=no, menubar=no, scrollbars=yes, resizable=no,width=950, height=400,top=200,left=200");
+
+}
+</script>
+</head>
+
+<body bgcolor="#dedede">
+ <div class="logo">
+<a href="tableedit.html"><h1>Inventory System </h1></a>
+</div>
+<ol id="toc">
+    <li><a href="#inventory"><span>Inventory</span></a></li>
+    <li><a href="#sales"><span>Sales</span></a></li>
+    <li><a href="#alert"><span>To be order</span></a></li>
+	<li><a href="#addproitem"><span>Add Item</span></a></li>
+    <li><a href="#addpro"><span>Add Product</span></a></li>
+    <li><a href="#editprice"><span>Edit Price</span></a></li>
+	<li><a href="index.php"><span>Logout</span></a></li>
+</ol>
+
+<div class="content" id="inventory">
+Click the table rows to enter the quantity sold<br><br>
+<table width="100%">
+<tr class="head">
+<th>Date</th>
+<th>Item</th>
+<th>Quantity Left</th>
+<th>Qty Sold </th>
+<th>Price (Rs)</th>
+</tr>
+
+
+<td class="edit_td">
+<span class="text"> 2022-01-01 </span> 
+</td>
+<td>
+<span class="text"> Laptops </span> 
+</td>
+<td>
+<span class="text">56 </span>
+</td>
+<td>
+
+<span id="last" class="text">
+	87
+</span> 
+<input type="text" value=" "  class="editbox" id="last_input_ "/>
+</td>
+<td>
+<span id="first" class="text"> 56000</span>
+<input type="text" value=" " class="editbox" id="first_input" />
+</td>
+
+</tr>
+
+
+</table>
+<br />
+Total Sales of this day:
+	    <b></b><br /><br />
+<input name="" type="button" value="Print" onclick="javascript:child_open()" style="cursor:pointer;" />
+</div>
+<div class="content" id="alert">
+	<table width="100%">
+		<tr class="head">
+		<th>Arrival Date</th>
+		<th>Item</th>
+		<th>Quantity Left</th>
+		<th>Qty Sold </th>
+		<th>Price (Rs)</th>
+		</tr>
+		
+		
+		<td class="edit_td">
+		<span class="text"> 2022-02-01 </span> 
+		</td>
+		<td>
+		<span class="text"> Phone </span> 
+		</td>
+		<td>
+		<span class="text">26 </span>
+		</td>
+		<td>
+		
+		<span id="last" class="text">
+			17
+		</span> 
+		<input type="text" value=" "  class="editbox" id="last_input_ "/>
+		</td>
+		<td>
+		<span id="first" class="text"> 26000</span>
+		<input type="text" value=" " class="editbox" id="first_input" />
+		</td>
+		
+		</tr>
+		
+		
+		</table>
+</div>
+<div class="content" id="sales">
+	<form action="tableedit.php#sales" method="post">
+	From: <input name="from" type="date" class="tcal"/>
+      To: <input name="to" type="date" class="tcal"/>
+	  <input name="" type="submit" value="Seach" />
+	  </form><br />
+	 Total Sales:  
+	  
+</div>
+<div class="content" id="addproitem">
+<form action="updateproduct.php" method="post">
+	<div style="margin-left: 48px;">
+	Product name:
+	</div>
+	<br />
+	Number of Item To Add:<input name="itemnumber" type="number" /><br />
+	<div style="margin-left: 127px; margin-top: 14px;"><input name="" type="submit" value="Add" /></div>
+</form>
+</div>
+<div class="content" id="addpro">
+<form action="saveproduct.php" method="post">
+	<div style="margin-left: 48px;">
+	Product name:<input name="proname" type="text" />
+	</div>
+	<br />
+	<div style="margin-left: 97px;">
+	Price:<input name="price" type="text" placeholder="Rupees"  />
+	</div>
+	<br />
+	<div style="margin-left: 80px;">
+	Quantity:<input name="qty" type="number" />
+	</div>
+	<div style="margin-left: 127px; margin-top: 14px;"><input name="" type="submit" value="Add" /></div>
+</form>
+</div>
+<div class="content" id="editprice">
+<form action="updateprice.php" method="post">
+	<div style="margin-left: 48px;">
+	Product name:
+	</div>
+	<br />
+	<div style="margin-left: 97px;">Price:<input name="itemprice" type="text" /></div>
+	<div style="margin-left: 127px; margin-top: 14px;"><input name="" type="submit" value="Update" /></div>
+</form>
+</div>
+<script src="activatables.js" type="text/javascript"></script>
+<script type="text/javascript">
+activatables('page', ['inventory', 'alert', 'sales', 'addproitem', 'addpro', 'editprice']);
+</script>
+</body>
+</html>
