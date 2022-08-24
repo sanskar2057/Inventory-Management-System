@@ -6,7 +6,7 @@
     <style>
         body{
             /* background-color: rgb(21, 150, 241); */
-            background-image:url('warehouse.png'); 
+            background-image:url('login/warehouse.png'); 
             display:block;
             height: 100%;
             width: 100%;
@@ -107,22 +107,22 @@
             <div class="line"><hr></div>
         </div>
         <div class="loginBody">
-            <h2>ADMIN LOGIN</h2>
-            <form name="myform" action="loginAdmin_process.php" method="POST" >
+            <h2>LOGIN</h2>
+            <form name="myform" action="login/login_process.php" method="POST" >
                 <div class="loginInputContainer">
                     <label for="username">USERNAME</label>
-                    <input placeholder="username" type="text" name="username"/>
+                    <input placeholder="username" type="text" name="username" required/>
                 </div>
                 <div class="loginInputContainer">
                     <label for="password">PASSWORD</label>
-                    <input placeholder="password" type="password" name="password"/>
+                    <input placeholder="password" type="password" name="password" required/>
                 </div>
                 <div class="loginButton">
                     <input type="submit" value="Login">
                 </div>
 
                 <div class="registerButton">
-                <a href="../index.php"><input type="button" value="User Login"></a>
+                <a href="login/loginAdmin.php"><input type="button" value="Login as Admin"></a>
                 </div>
             </form>
         </div>
