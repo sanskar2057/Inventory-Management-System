@@ -8,7 +8,7 @@
        <div class="content" id="addproitem">
             <form action="sales_process.php" method="post">
                 <div style="font-size: 25px;">
-                Select Id:
+                Product:
                 <select name="pid" id="pid" style="margin-left:58px;"required>
                 <option value="">Select Product</option>
                 <?php
